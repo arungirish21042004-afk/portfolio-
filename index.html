@@ -320,7 +320,7 @@
 
     /* ---------- WORK SECTIONS ---------- */
     .work-section {
-      padding: 80px 0 45px;
+      padding: 45px 0 25px;
       background: var(--bg-content);
       border-top: 1px solid var(--border-light);
       position: relative;
@@ -328,7 +328,7 @@
 
     .work-section .head {
       padding: 0 6vw;
-      margin-bottom: 28px;
+      margin-bottom: 16px;
     }
 
     .work-section .tag {
@@ -339,7 +339,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-weight: 700;
     }
 
@@ -359,7 +359,7 @@
     .work-section .desc {
       color: var(--text-muted);
       font-size: 0.95rem;
-      margin-top: 6px;
+      margin-top: 4px;
       line-height: 1.5;
     }
 
@@ -373,7 +373,7 @@
     .marquee-track {
       display: flex;
       width: max-content;
-      gap: 22px;
+      gap: 20px;
       animation: scroll-left 28s linear infinite;
     }
 
@@ -402,8 +402,8 @@
     .card {
       flex: 0 0 auto;
       width: 220px;
-      height: 330px;
-      border-radius: 18px;
+      height: 290px;
+      border-radius: 16px;
       overflow: hidden;
       position: relative;
       background: var(--bg-card);
@@ -424,7 +424,8 @@
     .card video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      object-position: center;
       display: block;
       transition: transform .4s ease;
     }
@@ -643,8 +644,7 @@
 
       <div class="hero-right fade-elem">
         <div class="portrait-wrapper">
-          <img src="photoshop/photoshop1.jpeg" alt="Arun - Graphic Designer"
-            class="portrait-img">
+          <img src="photoshop/photoshop1.jpeg" alt="Arun - Graphic Designer" class="portrait-img" loading="eager" decoding="async">
           <div class="stat-card">
             <div class="stat-number">2+</div>
             <div class="stat-text">Years of hands-on design &amp; editing experience</div>
@@ -663,70 +663,61 @@
     </div>
     <div class="marquee">
       <div class="marquee-track">
-        <div class="card"><img src="photoshop/photoshop1.jpeg" alt="Photoshop project 1">
+        <div class="card"><img src="photoshop/photoshop1.jpeg" alt="Photoshop project 1" loading="lazy" decoding="async">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop2.jpeg"
-            alt="Photoshop project 2">
+        <div class="card"><img src="photoshop/photoshop2.jpeg" alt="Photoshop project 2" loading="lazy" decoding="async">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop3.jpeg"
-            alt="Photoshop project 3">
+        <div class="card"><img src="photoshop/photoshop3.jpeg" alt="Photoshop project 3" loading="lazy" decoding="async">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop4.jpeg" alt="Photoshop project 4">
+        <div class="card"><img src="photoshop/photoshop4.jpeg" alt="Photoshop project 4" loading="lazy" decoding="async">
           <div class="label">Project 04</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop5.jpeg"
-            alt="Photoshop project 5">
+        <div class="card"><img src="photoshop/photoshop5.jpeg" alt="Photoshop project 5" loading="lazy" decoding="async">
           <div class="label">Project 05</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop6.jpg" alt="Photoshop project 6">
+        <div class="card"><img src="photoshop/photoshop6.jpg" alt="Photoshop project 6" loading="lazy" decoding="async">
           <div class="label">Project 06</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop7.jpeg"
-            alt="Photoshop project 7">
+        <div class="card"><img src="photoshop/photoshop7.jpeg" alt="Photoshop project 7" loading="lazy" decoding="async">
           <div class="label">Project 07</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop8.jpeg" alt="Photoshop project 8">
+        <div class="card"><img src="photoshop/photoshop8.jpeg" alt="Photoshop project 8" loading="lazy" decoding="async">
           <div class="label">Project 08</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop9.jpeg"
-            alt="Photoshop project 9">
+        <div class="card"><img src="photoshop/photoshop9.jpeg" alt="Photoshop project 9" loading="lazy" decoding="async">
           <div class="label">Project 09</div>
         </div>
         <!-- Duplicate for seamless loop -->
-        <div class="card"><img src="photoshop/photoshop1.jpeg" alt="Photoshop project 1">
+        <div class="card"><img src="photoshop/photoshop1.jpeg" alt="Photoshop project 1" loading="lazy" decoding="async">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop2.jpeg"
-            alt="Photoshop project 2">
+        <div class="card"><img src="photoshop/photoshop2.jpeg" alt="Photoshop project 2" loading="lazy" decoding="async">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop3.jpeg"
-            alt="Photoshop project 3">
+        <div class="card"><img src="photoshop/photoshop3.jpeg" alt="Photoshop project 3" loading="lazy" decoding="async">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop4.jpeg" alt="Photoshop project 4">
+        <div class="card"><img src="photoshop/photoshop4.jpeg" alt="Photoshop project 4" loading="lazy" decoding="async">
           <div class="label">Project 04</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop5.jpeg"
-            alt="Photoshop project 5">
+        <div class="card"><img src="photoshop/photoshop5.jpeg" alt="Photoshop project 5" loading="lazy" decoding="async">
           <div class="label">Project 05</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop6.jpg" alt="Photoshop project 6">
+        <div class="card"><img src="photoshop/photoshop6.jpg" alt="Photoshop project 6" loading="lazy" decoding="async">
           <div class="label">Project 06</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop7.jpeg"
-            alt="Photoshop project 7">
+        <div class="card"><img src="photoshop/photoshop7.jpeg" alt="Photoshop project 7" loading="lazy" decoding="async">
           <div class="label">Project 07</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop8.jpeg" alt="Photoshop project 8">
+        <div class="card"><img src="photoshop/photoshop8.jpeg" alt="Photoshop project 8" loading="lazy" decoding="async">
           <div class="label">Project 08</div>
         </div>
-        <div class="card"><img src="photoshop/photoshop9.jpeg"
-            alt="Photoshop project 9">
+        <div class="card"><img src="photoshop/photoshop9.jpeg" alt="Photoshop project 9" loading="lazy" decoding="async">
           <div class="label">Project 09</div>
+        </div>
       </div>
     </div>
   </section>
@@ -739,29 +730,29 @@
     </div>
     <div class="marquee reverse">
       <div class="marquee-track">
-        <div class="card"><img src="illustrator/illustrator1.jpg" alt="Illustrator project 1">
+        <div class="card"><img src="illustrator/illustrator1.jpg" alt="Illustrator project 1" loading="lazy" decoding="async">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="illustrator/illustrator2.jpg" alt="Illustrator project 2">
+        <div class="card"><img src="illustrator/illustrator2.jpg" alt="Illustrator project 2" loading="lazy" decoding="async">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="illustrator/illustrator3.jpg" alt="Illustrator project 3">
+        <div class="card"><img src="illustrator/illustrator3.jpg" alt="Illustrator project 3" loading="lazy" decoding="async">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="illustrator/illustrator4.jpg" alt="Illustrator project 4">
+        <div class="card"><img src="illustrator/illustrator4.jpg" alt="Illustrator project 4" loading="lazy" decoding="async">
           <div class="label">Project 04</div>
         </div>
         <!-- Duplicate for seamless loop -->
-        <div class="card"><img src="illustrator/illustrator1.jpg" alt="Illustrator project 1">
+        <div class="card"><img src="illustrator/illustrator1.jpg" alt="Illustrator project 1" loading="lazy" decoding="async">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="illustrator/illustrator2.jpg" alt="Illustrator project 2">
+        <div class="card"><img src="illustrator/illustrator2.jpg" alt="Illustrator project 2" loading="lazy" decoding="async">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="illustrator/illustrator3.jpg" alt="Illustrator project 3">
+        <div class="card"><img src="illustrator/illustrator3.jpg" alt="Illustrator project 3" loading="lazy" decoding="async">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="illustrator/illustrator4.jpg" alt="Illustrator project 4">
+        <div class="card"><img src="illustrator/illustrator4.jpg" alt="Illustrator project 4" loading="lazy" decoding="async">
           <div class="label">Project 04</div>
         </div>
       </div>
@@ -776,35 +767,35 @@
     </div>
     <div class="marquee">
       <div class="marquee-track">
-        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1">
+        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1" loading="lazy" decoding="async">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2">
+        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2" loading="lazy" decoding="async">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3">
+        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3" loading="lazy" decoding="async">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4">
+        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4" loading="lazy" decoding="async">
           <div class="label">Project 04</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5">
+        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5" loading="lazy" decoding="async">
           <div class="label">Project 05</div>
         </div>
         <!-- Duplicate for seamless loop -->
-        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1">
+        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1" loading="lazy" decoding="async">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2">
+        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2" loading="lazy" decoding="async">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3">
+        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3" loading="lazy" decoding="async">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4">
+        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4" loading="lazy" decoding="async">
           <div class="label">Project 04</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5">
+        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5" loading="lazy" decoding="async">
           <div class="label">Project 05</div>
         </div>
       </div>
@@ -819,35 +810,35 @@
     </div>
     <div class="marquee reverse">
       <div class="marquee-track">
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1" loading="lazy" decoding="async">
           <div class="label">Reel 01</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2" loading="lazy" decoding="async">
           <div class="label">Reel 02</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3" loading="lazy" decoding="async">
           <div class="label">Reel 03</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4" loading="lazy" decoding="async">
           <div class="label">Reel 04</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5" loading="lazy" decoding="async">
           <div class="label">Reel 05</div>
         </div>
         <!-- Duplicate for seamless loop -->
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1" loading="lazy" decoding="async">
           <div class="label">Reel 01</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2" loading="lazy" decoding="async">
           <div class="label">Reel 02</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3" loading="lazy" decoding="async">
           <div class="label">Reel 03</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4" loading="lazy" decoding="async">
           <div class="label">Reel 04</div>
         </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5" loading="lazy" decoding="async">
           <div class="label">Reel 05</div>
         </div>
       </div>
