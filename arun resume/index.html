@@ -41,18 +41,17 @@
   nav a:hover{ color:var(--ink); }
 
   .hero{
-    min-height:100vh;
+    padding: 100px 6vw 25px;
     display:flex; flex-direction:column; justify-content:center;
-    padding:0 6vw;
     position:relative;
   }
   .hero .eyebrow{
     color:var(--accent-ps); letter-spacing:4px; text-transform:uppercase;
-    font-size:0.8rem; margin-bottom:18px;
+    font-size:0.8rem; margin-bottom:12px;
   }
   .hero h1{
-    font-size:clamp(2.6rem, 7vw, 5.5rem);
-    line-height:1.02;
+    font-size:clamp(2.2rem, 5vw, 3.8rem);
+    line-height:1.08;
     font-weight:800;
     max-width:900px;
   }
@@ -61,20 +60,12 @@
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   .hero p{
-    color:var(--muted); max-width:520px; margin-top:22px; font-size:1.05rem; line-height:1.6;
+    color:var(--muted); max-width:560px; margin-top:14px; font-size:1rem; line-height:1.5;
   }
-  .scroll-hint{
-    position:absolute; bottom:40px; left:6vw; color:var(--muted); font-size:0.8rem;
-    display:flex; align-items:center; gap:10px;
-  }
-  .scroll-hint::before{
-    content:''; width:26px; height:1px; background:var(--muted);
-    animation:pulseline 1.6s ease-in-out infinite;
-  }
-  @keyframes pulseline{ 0%,100%{opacity:.3} 50%{opacity:1} }
+  .scroll-hint{ display:none; }
 
   .work-section{
-    padding:90px 0 40px;
+    padding:35px 0 25px;
     border-top:1px solid var(--line);
     position:relative;
   }
@@ -218,8 +209,7 @@
 <section class="hero">
   <div class="eyebrow">Graphic Designer &amp; Video Editor</div>
   <h1>I make things look <span class="grad">right.</span></h1>
-  <p>Photoshop, Illustrator, CorelDraw and Video Editing — all my work in one place. Scroll down to explore.</p>
-  <div class="scroll-hint">Scroll down</div>
+  <p>Photoshop, Illustrator, CorelDraw and Video Editing — all my work in one place.</p>
 </section>
 
 <section class="work-section" data-tool="photoshop" id="photoshop">
