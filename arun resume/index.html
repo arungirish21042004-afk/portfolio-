@@ -544,11 +544,10 @@
     }
   });
 
-  /* ---------- LIGHTBOX ---------- */
-  const lb        = document.getElementById('lightbox');
-  const lbImg     = document.getElementById('lightbox-img');
-  let   idleTimer = null;
-  let   activeCard = null;
+  /* ---------- LIGHTBOX & HOVER PEEK ---------- */
+  const lb    = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  let activeCard = null;
 
   function showLightbox(src) {
     if (!src) return;
@@ -558,46 +557,35 @@
   function hideLightbox() {
     lb.classList.remove('active');
     lbImg.src = '';
-    clearTimeout(idleTimer);
   }
 
   document.querySelectorAll('.card').forEach(card => {
     const img = card.querySelector('img');
     if (!img) return;
 
-    /* Tap / Click to open lightbox immediately */
+    /* Tap / Click to open full size photo modal */
     card.addEventListener('click', (e) => {
       e.stopPropagation();
       showLightbox(img.src);
     });
 
-    /* Hover preview on PC mouse cursor */
+    /* Smooth iOS style hover peek & background blur on PC mouse */
     card.addEventListener('mouseenter', (e) => {
       if (e.pointerType === 'touch') return;
-      activeCard = img;
+      activeCard = card;
       card.classList.add('is-hovered');
       document.body.classList.add('card-hovered');
-      startIdle();
     });
 
     card.addEventListener('mouseleave', (e) => {
       if (e.pointerType === 'touch') return;
-      clearTimeout(idleTimer);
-      hideLightbox();
       card.classList.remove('is-hovered');
       document.body.classList.remove('card-hovered');
       activeCard = null;
     });
   });
 
-  function startIdle() {
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-      if (activeCard) showLightbox(activeCard.src);
-    }, 80);
-  }
-
-  /* Close lightbox on click, tap, or Escape key */
+  /* Close full size lightbox modal on click, tap, or Escape key */
   lb.addEventListener('click', hideLightbox);
   lb.addEventListener('touchstart', hideLightbox, { passive: true });
   document.addEventListener('keydown', (e) => {
