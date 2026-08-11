@@ -570,16 +570,19 @@
       showLightbox(img.src);
     });
 
-    /* iOS Peek hover effect for PC mouse cursor */
+    /* Hover preview on PC mouse cursor */
     card.addEventListener('mouseenter', (e) => {
       if (e.pointerType === 'touch') return;
       activeCard = img;
       card.classList.add('is-hovered');
       document.body.classList.add('card-hovered');
+      startIdle();
     });
 
     card.addEventListener('mouseleave', (e) => {
       if (e.pointerType === 'touch') return;
+      clearTimeout(idleTimer);
+      hideLightbox();
       card.classList.remove('is-hovered');
       document.body.classList.remove('card-hovered');
       activeCard = null;
@@ -590,13 +593,15 @@
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
       if (activeCard) showLightbox(activeCard.src);
-    }, 250);
+    }, 200);
   }
 
-  /* close on click/tap anywhere over lightbox or moving cursor over lightbox */
+  /* Close lightbox on click, tap, or Escape key */
   lb.addEventListener('click', hideLightbox);
-  lb.addEventListener('mousemove', hideLightbox);
   lb.addEventListener('touchstart', hideLightbox, { passive: true });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') hideLightbox();
+  });
 </script>
 
 </body>
