@@ -72,7 +72,7 @@
   .work-section .head{
     padding:0 6vw;
     display:flex; align-items:baseline; gap:18px; flex-wrap:wrap;
-    margin-bottom:40px;
+    margin-bottom:20px;
   }
   .work-section .tag{
     font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted);
@@ -186,8 +186,13 @@
   footer a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); }
 
   @media (max-width:640px){
-    .card{ width:160px; height:240px; }
-    nav a{ margin-left:16px; font-size:0.8rem; }
+    header{ padding:16px 5vw; }
+    .hero{ padding:80px 5vw 15px; }
+    .hero h1{ font-size: 2.1rem; }
+    .hero p{ font-size: 0.92rem; margin-top: 10px; }
+    .work-section{ padding: 25px 0 15px; }
+    .card{ width:150px; height:225px; }
+    nav a{ margin-left:10px; font-size:0.75rem; }
   }
   @media (prefers-reduced-motion: reduce){
     .marquee-track{ animation:none; }
