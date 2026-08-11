@@ -1,597 +1,950 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arun | Graphic Design &amp; Video Editing Portfolio</title>
-<style>
-  :root{
-    --bg-content: #f4efe7;
-    --bg-card: #ffffff;
-    --text-main: #2b1210;
-    --text-muted: #8a7770;
-    --accent-red: #d0301c;
-    --accent-orange: #ff6a3d;
-    --hero-bg: radial-gradient(120% 100% at 75% 20%, #4a0e0c, #170707 70%);
-    --border-light: rgba(43, 18, 16, 0.1);
-  }
-
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--bg-content);
-    color:var(--text-main);
-    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
-    overflow-x:hidden;
-  }
-
-  /* ---------- PRELOADER ---------- */
-  #preloader{
-    position:fixed; inset:0; z-index:1000;
-    background:#170707;
-    display:flex; align-items:center; justify-content:center;
-    transition:transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
-  }
-  #preloader.loaded{
-    transform:translateY(-100%);
-  }
-  .loader-content{ text-align:center; }
-  .loader-logo{
-    font-size:2.2rem; font-weight:800; color:#ffffff; letter-spacing:3px;
-    opacity:0; transform:translateY(-20px);
-    animation:slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-  }
-  .loader-logo span{ color:var(--accent-orange); }
-  .loader-bar-bg{
-    width:150px; height:3px; background:rgba(255,255,255,0.15);
-    border-radius:4px; margin:18px auto 0; overflow:hidden;
-  }
-  .loader-bar{
-    width:0%; height:100%; background:var(--accent-orange);
-    animation:loadFill 1s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
-  }
-  @keyframes slideDown{ to{ opacity:1; transform:translateY(0); } }
-  @keyframes loadFill{ to{ width:100%; } }
-
-  /* ---------- HEADER / NAV ---------- */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:22px 6vw;
-    background:linear-gradient(to bottom, rgba(23,7,7,0.85), transparent);
-    transition:background 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease;
-  }
-  header .logo{ font-weight:800; letter-spacing:1px; font-size:1.1rem; color:#ffffff; transition:color 0.35s; }
-  header .logo span{ color:var(--accent-orange); }
-  header nav a{
-    color:rgba(255,255,255,0.75); text-decoration:none; margin-left:28px; font-size:0.9rem;
-    transition:color 0.25s;
-  }
-  header nav a:hover{ color:#ffffff; }
-
-  header.scrolled{
-    background:rgba(244,239,231,0.94);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    padding:16px 6vw;
-    box-shadow:0 4px 20px rgba(43,18,16,0.06);
-  }
-  header.scrolled .logo{ color:var(--text-main); }
-  header.scrolled nav a{ color:var(--text-muted); }
-  header.scrolled nav a:hover{ color:var(--accent-red); }
-
-  /* ---------- HERO SECTION ---------- */
-  .hero{
-    background:var(--hero-bg);
-    min-height:100vh;
-    display:flex; align-items:center;
-    padding:120px 6vw 70px;
-    position:relative;
-    overflow:hidden;
-    color:#ffffff;
-  }
-  .hero-container{
-    display:grid;
-    grid-template-columns:1.2fr 0.9fr;
-    gap:50px;
-    align-items:center;
-    width:100%;
-    max-width:1280px;
-    margin:0 auto;
-  }
-  .hero-left .eyebrow{
-    color:var(--accent-orange);
-    letter-spacing:3px;
-    text-transform:uppercase;
-    font-size:0.82rem;
-    font-weight:700;
-    margin-bottom:16px;
-  }
-  .hero-left h1{
-    font-size:clamp(2.5rem, 5vw, 4.4rem);
-    line-height:1.05;
-    font-weight:800;
-    color:#ffffff;
-    margin-bottom:22px;
-  }
-  .hero-left h1 .grad{
-    background:linear-gradient(90deg, var(--accent-red), var(--accent-orange));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .badges-row{
-    display:flex; flex-wrap:wrap; gap:10px;
-    margin-bottom:24px;
-  }
-  .badge{
-    display:inline-block;
-    padding:6px 16px;
-    border:1px solid rgba(255,255,255,0.3);
-    border-radius:50px;
-    font-size:0.78rem;
-    color:#ffffff;
-    background:transparent;
-    backdrop-filter:blur(4px);
-    transition:border-color 0.2s, background 0.2s;
-  }
-  .badge:hover{
-    border-color:var(--accent-orange);
-    background:rgba(255,106,61,0.15);
-  }
-  .hero-left p{
-    color:rgba(255,255,255,0.78);
-    font-size:1.05rem;
-    line-height:1.6;
-    max-width:520px;
-  }
-
-  /* Right column portrait & stat card */
-  .portrait-wrapper{
-    position:relative;
-    width:100%;
-    max-width:420px;
-    margin:0 auto;
-  }
-  .portrait-img{
-    width:100%;
-    height:470px;
-    object-fit:cover;
-    border-radius:24px;
-    display:block;
-    filter:saturate(1.3) contrast(1.05) sepia(0.35) hue-rotate(-28deg);
-    box-shadow:0 25px 60px rgba(0,0,0,0.55);
-  }
-  .stat-card{
-    position:absolute;
-    bottom:-20px; left:-20px;
-    background:#ffffff;
-    color:var(--text-main);
-    padding:18px 22px;
-    border-radius:16px;
-    box-shadow:0 16px 40px rgba(0,0,0,0.22);
-    display:flex; align-items:center; gap:14px;
-    max-width:290px;
-    z-index:10;
-  }
-  .stat-number{
-    font-size:2.4rem;
-    font-weight:800;
-    color:var(--accent-red);
-    line-height:1;
-  }
-  .stat-text{
-    font-size:0.78rem;
-    line-height:1.35;
-    color:var(--text-muted);
-    font-weight:600;
-  }
-
-  /* Staggered Fade Up Animations */
-  .fade-elem{
-    opacity:0;
-    transform:translateY(24px);
-    transition:opacity 0.7s ease, transform 0.7s ease;
-  }
-  body.hero-active .hero-left .fade-elem:nth-child(1){ transition-delay:0.1s; opacity:1; transform:translateY(0); }
-  body.hero-active .hero-left .fade-elem:nth-child(2){ transition-delay:0.25s; opacity:1; transform:translateY(0); }
-  body.hero-active .hero-left .fade-elem:nth-child(3){ transition-delay:0.4s; opacity:1; transform:translateY(0); }
-  body.hero-active .hero-left .fade-elem:nth-child(4){ transition-delay:0.55s; opacity:1; transform:translateY(0); }
-  body.hero-active .hero-right.fade-elem{ transition-delay:0.45s; opacity:1; transform:translateY(0); }
-
-  /* ---------- WORK SECTIONS ---------- */
-  .work-section{
-    padding:80px 0 45px;
-    background:var(--bg-content);
-    border-top:1px solid var(--border-light);
-    position:relative;
-  }
-  .work-section .head{
-    padding:0 6vw;
-    margin-bottom:28px;
-  }
-  .work-section .tag{
-    font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted);
-    display:flex; align-items:center; gap:8px; margin-bottom:8px; font-weight:700;
-  }
-  .work-section .asterisk{ color:var(--accent-orange); font-size:1rem; }
-  .work-section h2{
-    font-size:clamp(2rem, 4.5vw, 3.2rem);
-    font-weight:800;
-    text-transform:uppercase;
-    color:var(--text-main);
-    letter-spacing:0.5px;
-  }
-  .work-section .desc{
-    color:var(--text-muted);
-    font-size:0.95rem;
-    margin-top:6px;
-    line-height:1.5;
-  }
-
-  .marquee{
-    width:100%;
-    overflow:hidden;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  }
-  .marquee-track{
-    display:flex;
-    width:max-content;
-    gap:22px;
-    animation:scroll-left 28s linear infinite;
-  }
-  .marquee.reverse .marquee-track{
-    animation-direction:reverse;
-    animation-duration:34s;
-  }
-  @media (hover: hover) and (pointer: fine){
-    .marquee:hover .marquee-track{
-      animation-play-state:paused;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arun | Graphic Design &amp; Video Editing Portfolio</title>
+  <style>
+    :root {
+      --bg-content: #f4efe7;
+      --bg-card: #ffffff;
+      --text-main: #2b1210;
+      --text-muted: #8a7770;
+      --accent-red: #d0301c;
+      --accent-orange: #ff6a3d;
+      --hero-bg: radial-gradient(120% 100% at 75% 20%, #4a0e0c, #170707 70%);
+      --border-light: rgba(43, 18, 16, 0.1);
     }
-  }
-  @keyframes scroll-left{
-    from{ transform:translateX(0); }
-    to{ transform:translateX(-50%); }
-  }
 
-  /* iOS Peek & Pop Effects */
-  .card{
-    flex:0 0 auto;
-    width:220px; height:330px;
-    border-radius:18px;
-    overflow:hidden;
-    position:relative;
-    background:var(--bg-card);
-    border:none;
-    box-shadow:0 10px 30px rgba(43,18,16,0.07);
-    cursor:zoom-in;
-    transition:transform .35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .35s ease, filter .35s ease, opacity .35s ease;
-    z-index:1;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body.card-hovered .work-section .head,
-  body.card-hovered .card:not(.is-hovered){
-    filter:blur(6px) opacity(0.55);
-    transition:filter 0.35s ease, opacity 0.35s ease;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  .card.is-hovered, .card:hover{
-    transform:scale(1.16) translateY(-8px);
-    z-index:60;
-    box-shadow:0 30px 70px rgba(23,7,7,0.32);
-    filter:none !important;
-    opacity:1 !important;
-  }
+    body {
+      background: var(--bg-content);
+      color: var(--text-main);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
 
-  .card img, .card video{
-    width:100%; height:100%; object-fit:contain;
-    display:block;
-    transition:transform .4s ease;
-  }
-  .card:hover img, .card:hover video{ transform:scale(1.04); }
-  .card .label{
-    position:absolute; bottom:0; left:0; right:0;
-    padding:10px 14px;
-    font-size:0.78rem; color:#ffffff;
-    background:linear-gradient(to top, rgba(23,7,7,0.85), transparent);
-    opacity:0; transition:opacity .3s;
-  }
-  .card:hover .label{ opacity:1; }
+    /* ---------- PRELOADER ---------- */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: #170707;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+    }
 
-  /* ---------- LIGHTBOX (iOS Full Screen Pop) ---------- */
-  #lightbox{
-    display:none;
-    position:fixed; inset:0; z-index:999;
-    background:rgba(17,7,7,0.72);
-    align-items:center; justify-content:center;
-    backdrop-filter:blur(20px) saturate(1.2);
-    -webkit-backdrop-filter:blur(20px) saturate(1.2);
-    animation:lb-in .3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  #lightbox.active{ display:flex; }
-  @keyframes lb-in{
-    from{ opacity:0; transform:scale(.85); }
-    to{ opacity:1; transform:scale(1); }
-  }
-  #lightbox img{
-    max-width:92vw;
-    max-height:88vh;
-    width:auto; height:auto;
-    object-fit:contain;
-    border-radius:18px;
-    box-shadow:0 35px 95px rgba(0,0,0,0.75);
-    pointer-events:none;
-  }
-  #lightbox .lb-hint{
-    position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
-    color:rgba(255,255,255,0.6); font-size:0.78rem; letter-spacing:2px;
-    text-transform:uppercase;
-  }
+    #preloader.loaded {
+      transform: translateY(-100%);
+    }
 
-  .video-card::after{
-    content:'\25B6';
-    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-    width:44px; height:44px; border-radius:50%;
-    background:rgba(23,7,7,0.6);
-    display:flex; align-items:center; justify-content:center;
-    font-size:0.9rem; color:#fff;
-    pointer-events:none;
-  }
+    .loader-content {
+      text-align: center;
+    }
 
-  /* ---------- FOOTER ---------- */
-  footer{
-    background:var(--bg-content);
-    text-align:center; padding:50px 6vw 40px;
-    color:var(--text-muted); font-size:0.88rem;
-    border-top:1px solid var(--border-light);
-  }
-  footer a{ color:var(--text-main); font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--accent-orange); }
+    .loader-logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 3px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
 
-  /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
-  @media (max-width:900px){
-    .hero-container{ grid-template-columns:1fr; gap:40px; }
-    .hero{ padding:100px 5vw 60px; min-height:auto; }
-    .portrait-wrapper{ max-width:340px; }
-    .portrait-img{ height:400px; }
-    .stat-card{ bottom:-15px; left:-10px; padding:14px 18px; }
-  }
-  @media (max-width:640px){
-    header{ padding:16px 5vw; }
-    header.scrolled{ padding:12px 5vw; }
-    .hero-left h1{ font-size:2.2rem; }
-    .card{ width:160px; height:240px; }
-    nav a{ margin-left:12px; font-size:0.78rem; }
-    .work-section{ padding:50px 0 30px; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .marquee-track{ animation:none; }
-  }
-</style>
+    .loader-logo span {
+      color: var(--accent-orange);
+    }
+
+    .loader-bar-bg {
+      width: 150px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      margin: 18px auto 0;
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--accent-orange);
+      animation: loadFill 1s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+    }
+
+    @keyframes slideDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes loadFill {
+      to {
+        width: 100%;
+      }
+    }
+
+    /* ---------- HEADER / NAV ---------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 6vw;
+      background: linear-gradient(to bottom, rgba(23, 7, 7, 0.85), transparent);
+      transition: background 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    header .logo {
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+      color: #ffffff;
+      transition: color 0.35s;
+    }
+
+    header .logo span {
+      color: var(--accent-orange);
+    }
+
+    header nav a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      margin-left: 28px;
+      font-size: 0.9rem;
+      transition: color 0.25s;
+    }
+
+    header nav a:hover {
+      color: #ffffff;
+    }
+
+    header.scrolled {
+      background: rgba(244, 239, 231, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 16px 6vw;
+      box-shadow: 0 4px 20px rgba(43, 18, 16, 0.06);
+    }
+
+    header.scrolled .logo {
+      color: var(--text-main);
+    }
+
+    header.scrolled nav a {
+      color: var(--text-muted);
+    }
+
+    header.scrolled nav a:hover {
+      color: var(--accent-red);
+    }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      background: var(--hero-bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 6vw 70px;
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .hero-left .eyebrow {
+      color: var(--accent-orange);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.5rem, 5vw, 4.4rem);
+      line-height: 1.05;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 22px;
+    }
+
+    .hero-left h1 .grad {
+      background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      font-size: 0.78rem;
+      color: #ffffff;
+      background: transparent;
+      backdrop-filter: blur(4px);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .badge:hover {
+      border-color: var(--accent-orange);
+      background: rgba(255, 106, 61, 0.15);
+    }
+
+    .hero-left p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    /* Right column portrait & stat card */
+    .portrait-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 470px;
+      object-fit: cover;
+      border-radius: 24px;
+      display: block;
+      filter: saturate(1.3) contrast(1.05) sepia(0.35) hue-rotate(-28deg);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    .stat-card {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: #ffffff;
+      color: var(--text-main);
+      padding: 18px 22px;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 290px;
+      z-index: 10;
+    }
+
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent-red);
+      line-height: 1;
+    }
+
+    .stat-text {
+      font-size: 0.78rem;
+      line-height: 1.35;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Staggered Fade Up Animations */
+    .fade-elem {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    body.hero-active .hero-left .fade-elem:nth-child(1) {
+      transition-delay: 0.1s;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body.hero-active .hero-left .fade-elem:nth-child(2) {
+      transition-delay: 0.25s;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body.hero-active .hero-left .fade-elem:nth-child(3) {
+      transition-delay: 0.4s;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body.hero-active .hero-left .fade-elem:nth-child(4) {
+      transition-delay: 0.55s;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body.hero-active .hero-right.fade-elem {
+      transition-delay: 0.45s;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- WORK SECTIONS ---------- */
+    .work-section {
+      padding: 80px 0 45px;
+      background: var(--bg-content);
+      border-top: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .work-section .head {
+      padding: 0 6vw;
+      margin-bottom: 28px;
+    }
+
+    .work-section .tag {
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .work-section .asterisk {
+      color: var(--accent-orange);
+      font-size: 1rem;
+    }
+
+    .work-section h2 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    .work-section .desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 22px;
+      animation: scroll-left 28s linear infinite;
+    }
+
+    .marquee.reverse .marquee-track {
+      animation-direction: reverse;
+      animation-duration: 34s;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .marquee:hover .marquee-track {
+        animation-play-state: paused;
+      }
+    }
+
+    @keyframes scroll-left {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* iOS Peek & Pop Effects */
+    .card {
+      flex: 0 0 auto;
+      width: 220px;
+      height: 330px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-card);
+      border: none;
+      box-shadow: 0 10px 30px rgba(43, 18, 16, 0.07);
+      cursor: zoom-in;
+      transition: transform .35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .35s ease, filter .35s ease, opacity .35s ease;
+      z-index: 1;
+    }
+
+    body.card-hovered .work-section .head,
+    body.card-hovered .card:not(.is-hovered) {
+      filter: blur(6px) opacity(0.55);
+      transition: filter 0.35s ease, opacity 0.35s ease;
+    }
+
+    .card.is-hovered,
+    .card:hover {
+      transform: scale(1.16) translateY(-8px);
+      z-index: 60;
+      box-shadow: 0 30px 70px rgba(23, 7, 7, 0.32);
+      filter: none !important;
+      opacity: 1 !important;
+    }
+
+    .card img,
+    .card video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform .4s ease;
+    }
+
+    .card:hover img,
+    .card:hover video {
+      transform: scale(1.04);
+    }
+
+    .card .label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      color: #ffffff;
+      background: linear-gradient(to top, rgba(23, 7, 7, 0.85), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .card:hover .label {
+      opacity: 1;
+    }
+
+    /* ---------- LIGHTBOX (iOS Full Screen Pop) ---------- */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(17, 7, 7, 0.72);
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      animation: lb-in .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #lightbox.active {
+      display: flex;
+    }
+
+    @keyframes lb-in {
+      from {
+        opacity: 0;
+        transform: scale(.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 18px;
+      box-shadow: 0 35px 95px rgba(0, 0, 0, 0.75);
+      pointer-events: none;
+    }
+
+    #lightbox .lb-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .video-card::after {
+      content: '\25B6';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(23, 7, 7, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: var(--bg-content);
+      text-align: center;
+      padding: 50px 6vw 40px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    footer a {
+      color: var(--text-main);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--accent-orange);
+    }
+
+    /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
+    @media (max-width:900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero {
+        padding: 100px 5vw 60px;
+        min-height: auto;
+      }
+
+      .portrait-wrapper {
+        max-width: 340px;
+      }
+
+      .portrait-img {
+        height: 400px;
+      }
+
+      .stat-card {
+        bottom: -15px;
+        left: -10px;
+        padding: 14px 18px;
+      }
+    }
+
+    @media (max-width:640px) {
+      header {
+        padding: 16px 5vw;
+      }
+
+      header.scrolled {
+        padding: 12px 5vw;
+      }
+
+      .hero-left h1 {
+        font-size: 2.2rem;
+      }
+
+      .card {
+        width: 160px;
+        height: 240px;
+      }
+
+      nav a {
+        margin-left: 12px;
+        font-size: 0.78rem;
+      }
+
+      .work-section {
+        padding: 50px 0 30px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track {
+        animation: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- PRELOADER -->
-<div id="preloader">
-  <div class="loader-content">
-    <div class="loader-logo">ARUN<span>.</span>DESIGN</div>
-    <div class="loader-bar-bg">
-      <div class="loader-bar"></div>
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="loader-content">
+      <div class="loader-logo">ARUN<span>.</span>DESIGN</div>
+      <div class="loader-bar-bg">
+        <div class="loader-bar"></div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- HEADER / NAV -->
-<header id="navbar">
-  <div class="logo">ARUN<span>.</span>DESIGN</div>
-  <nav>
-    <a href="#photoshop">Photoshop</a>
-    <a href="#illustrator">Illustrator</a>
-    <a href="#coreldraw">CorelDraw</a>
-    <a href="#video">Video</a>
-  </nav>
-</header>
+  <!-- HEADER / NAV -->
+  <header id="navbar">
+    <div class="logo">ARUN<span>.</span>DESIGN</div>
+    <nav>
+      <a href="#photoshop">Photoshop</a>
+      <a href="#illustrator">Illustrator</a>
+      <a href="#coreldraw">CorelDraw</a>
+      <a href="#video">Video</a>
+    </nav>
+  </header>
 
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="hero-container">
-    <div class="hero-left">
-      <div class="eyebrow fade-elem">Graphic Designer &amp; Video Editor</div>
-      <h1 class="fade-elem">I make things look <span class="grad">right.</span></h1>
-      
-      <div class="badges-row fade-elem">
-        <span class="badge">Photo Editing</span>
-        <span class="badge">Vector Illustration</span>
-        <span class="badge">Print Design</span>
-        <span class="badge">Video Editing</span>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-left">
+        <div class="eyebrow fade-elem">Graphic Designer &amp; Video Editor</div>
+        <h1 class="fade-elem">I make things look <span class="grad">right.</span></h1>
+
+        <div class="badges-row fade-elem">
+          <span class="badge">Photo Editing</span>
+          <span class="badge">Vector Illustration</span>
+          <span class="badge">Print Design</span>
+          <span class="badge">Video Editing</span>
+        </div>
+
+        <p class="fade-elem">Photoshop, Illustrator, CorelDraw and Video Editing — all my work in one place.</p>
       </div>
 
-      <p class="fade-elem">Photoshop, Illustrator, CorelDraw and Video Editing — all my work in one place.</p>
-    </div>
-
-    <div class="hero-right fade-elem">
-      <div class="portrait-wrapper">
-        <img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM.jpeg" alt="Arun - Graphic Designer" class="portrait-img">
-        <div class="stat-card">
-          <div class="stat-number">2+</div>
-          <div class="stat-text">Years of hands-on design &amp; editing experience</div>
+      <div class="hero-right fade-elem">
+        <div class="portrait-wrapper">
+          <img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM.jpeg" alt="Arun - Graphic Designer"
+            class="portrait-img">
+          <div class="stat-card">
+            <div class="stat-number">2+</div>
+            <div class="stat-text">Years of hands-on design &amp; editing experience</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- WORK SECTIONS -->
-<section class="work-section" data-tool="photoshop" id="photoshop">
-  <div class="head">
-    <div class="tag"><span class="asterisk">✳</span> 01 — Editing &amp; Compositing</div>
-    <h2>Photoshop</h2>
-    <div class="desc">High-end photo manipulation, color grading, retouching, and visual compositing.</div>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM.jpeg" alt="Photoshop project 1"><div class="label">Project 01</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (1).jpeg" alt="Photoshop project 2"><div class="label">Project 02</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (2).jpeg" alt="Photoshop project 3"><div class="label">Project 03</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM.jpeg" alt="Photoshop project 4"><div class="label">Project 04</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (1).jpeg" alt="Photoshop project 5"><div class="label">Project 05</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (2).jpeg" alt="Photoshop project 6"><div class="label">Project 06</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM.jpeg" alt="Photoshop project 7"><div class="label">Project 07</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM (1).jpeg" alt="Photoshop project 8"><div class="label">Project 08</div></div>
-      <!-- Duplicate for seamless loop -->
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM.jpeg" alt="Photoshop project 1"><div class="label">Project 01</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (1).jpeg" alt="Photoshop project 2"><div class="label">Project 02</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (2).jpeg" alt="Photoshop project 3"><div class="label">Project 03</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM.jpeg" alt="Photoshop project 4"><div class="label">Project 04</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (1).jpeg" alt="Photoshop project 5"><div class="label">Project 05</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (2).jpeg" alt="Photoshop project 6"><div class="label">Project 06</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM.jpeg" alt="Photoshop project 7"><div class="label">Project 07</div></div>
-      <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM (1).jpeg" alt="Photoshop project 8"><div class="label">Project 08</div></div>
+  <!-- WORK SECTIONS -->
+  <section class="work-section" data-tool="photoshop" id="photoshop">
+    <div class="head">
+      <div class="tag"><span class="asterisk">✳</span> 01 — Editing &amp; Compositing</div>
+      <h2>Photoshop</h2>
+      <div class="desc">High-end photo manipulation, color grading, retouching, and visual compositing.</div>
     </div>
-  </div>
-</section>
-
-<section class="work-section" data-tool="illustrator" id="illustrator">
-  <div class="head">
-    <div class="tag"><span class="asterisk">✳</span> 02 — Vector &amp; Illustration</div>
-    <h2>Illustrator</h2>
-    <div class="desc">Clean vector graphics, custom branding, logos, and scalable illustrations.</div>
-  </div>
-  <div class="marquee reverse">
-    <div class="marquee-track">
-      <div class="card"><img src="https://picsum.photos/seed/ai1/600/400" alt="Illustrator project 1"><div class="label">Project 01</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai2/600/400" alt="Illustrator project 2"><div class="label">Project 02</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai3/600/400" alt="Illustrator project 3"><div class="label">Project 03</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai4/600/400" alt="Illustrator project 4"><div class="label">Project 04</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai5/600/400" alt="Illustrator project 5"><div class="label">Project 05</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai1/600/400" alt="Illustrator project 1"><div class="label">Project 01</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai2/600/400" alt="Illustrator project 2"><div class="label">Project 02</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai3/600/400" alt="Illustrator project 3"><div class="label">Project 03</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai4/600/400" alt="Illustrator project 4"><div class="label">Project 04</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/ai5/600/400" alt="Illustrator project 5"><div class="label">Project 05</div></div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM.jpeg" alt="Photoshop project 1">
+          <div class="label">Project 01</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (1).jpeg"
+            alt="Photoshop project 2">
+          <div class="label">Project 02</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (2).jpeg"
+            alt="Photoshop project 3">
+          <div class="label">Project 03</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM.jpeg" alt="Photoshop project 4">
+          <div class="label">Project 04</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (1).jpeg"
+            alt="Photoshop project 5">
+          <div class="label">Project 05</div>
+        </div>
+        <div class="card"><img src="photoshop/photoshop6.jpg" alt="Photoshop project 6">
+          <div class="label">Project 06</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (2).jpeg"
+            alt="Photoshop project 6">
+          <div class="label">Project 06</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM.jpeg" alt="Photoshop project 7">
+          <div class="label">Project 07</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM (1).jpeg"
+            alt="Photoshop project 8">
+          <div class="label">Project 08</div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM.jpeg" alt="Photoshop project 1">
+          <div class="label">Project 01</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (1).jpeg"
+            alt="Photoshop project 2">
+          <div class="label">Project 02</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.17 PM (2).jpeg"
+            alt="Photoshop project 3">
+          <div class="label">Project 03</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM.jpeg" alt="Photoshop project 4">
+          <div class="label">Project 04</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (1).jpeg"
+            alt="Photoshop project 5">
+          <div class="label">Project 05</div>
+        </div>
+        <div class="card"><img src="photoshop/photoshop6.jpg" alt="Photoshop project 6">
+          <div class="label">Project 06</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.18 PM (2).jpeg"
+            alt="Photoshop project 6">
+          <div class="label">Project 06</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM.jpeg" alt="Photoshop project 7">
+          <div class="label">Project 07</div>
+        </div>
+        <div class="card"><img src="photoshop/WhatsApp Image 2026-08-11 at 12.35.19 PM (1).jpeg"
+            alt="Photoshop project 8">
+          <div class="label">Project 08</div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="work-section" data-tool="coreldraw" id="coreldraw">
-  <div class="head">
-    <div class="tag"><span class="asterisk">✳</span> 03 — Layout &amp; Print Design</div>
-    <h2>CorelDraw</h2>
-    <div class="desc">Professional print layouts, marketing collateral, brochures, and banner design.</div>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1"><div class="label">Project 01</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2"><div class="label">Project 02</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3"><div class="label">Project 03</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4"><div class="label">Project 04</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5"><div class="label">Project 05</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1"><div class="label">Project 01</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2"><div class="label">Project 02</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3"><div class="label">Project 03</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4"><div class="label">Project 04</div></div>
-      <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5"><div class="label">Project 05</div></div>
+  <section class="work-section" data-tool="illustrator" id="illustrator">
+    <div class="head">
+      <div class="tag"><span class="asterisk">✳</span> 02 — Vector &amp; Illustration</div>
+      <h2>Illustrator</h2>
+      <div class="desc">Clean vector graphics, custom branding, logos, and scalable illustrations.</div>
     </div>
-  </div>
-</section>
-
-<section class="work-section" data-tool="video" id="video">
-  <div class="head">
-    <div class="tag"><span class="asterisk">✳</span> 04 — Motion &amp; Video Editing</div>
-    <h2>Video Editing</h2>
-    <div class="desc">Dynamic reel editing, motion graphics, color grading, and video post-production.</div>
-  </div>
-  <div class="marquee reverse">
-    <div class="marquee-track">
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1"><div class="label">Reel 01</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2"><div class="label">Reel 02</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3"><div class="label">Reel 03</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4"><div class="label">Reel 04</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5"><div class="label">Reel 05</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1"><div class="label">Reel 01</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2"><div class="label">Reel 02</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3"><div class="label">Reel 03</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4"><div class="label">Reel 04</div></div>
-      <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5"><div class="label">Reel 05</div></div>
+    <div class="marquee reverse">
+      <div class="marquee-track">
+        <div class="card"><img src="https://picsum.photos/seed/ai1/600/400" alt="Illustrator project 1">
+          <div class="label">Project 01</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai2/600/400" alt="Illustrator project 2">
+          <div class="label">Project 02</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai3/600/400" alt="Illustrator project 3">
+          <div class="label">Project 03</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai4/600/400" alt="Illustrator project 4">
+          <div class="label">Project 04</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai5/600/400" alt="Illustrator project 5">
+          <div class="label">Project 05</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai1/600/400" alt="Illustrator project 1">
+          <div class="label">Project 01</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai2/600/400" alt="Illustrator project 2">
+          <div class="label">Project 02</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai3/600/400" alt="Illustrator project 3">
+          <div class="label">Project 03</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai4/600/400" alt="Illustrator project 4">
+          <div class="label">Project 04</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/ai5/600/400" alt="Illustrator project 5">
+          <div class="label">Project 05</div>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <section class="work-section" data-tool="coreldraw" id="coreldraw">
+    <div class="head">
+      <div class="tag"><span class="asterisk">✳</span> 03 — Layout &amp; Print Design</div>
+      <h2>CorelDraw</h2>
+      <div class="desc">Professional print layouts, marketing collateral, brochures, and banner design.</div>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1">
+          <div class="label">Project 01</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2">
+          <div class="label">Project 02</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3">
+          <div class="label">Project 03</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4">
+          <div class="label">Project 04</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5">
+          <div class="label">Project 05</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1">
+          <div class="label">Project 01</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2">
+          <div class="label">Project 02</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3">
+          <div class="label">Project 03</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4">
+          <div class="label">Project 04</div>
+        </div>
+        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5">
+          <div class="label">Project 05</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work-section" data-tool="video" id="video">
+    <div class="head">
+      <div class="tag"><span class="asterisk">✳</span> 04 — Motion &amp; Video Editing</div>
+      <h2>Video Editing</h2>
+      <div class="desc">Dynamic reel editing, motion graphics, color grading, and video post-production.</div>
+    </div>
+    <div class="marquee reverse">
+      <div class="marquee-track">
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1">
+          <div class="label">Reel 01</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2">
+          <div class="label">Reel 02</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3">
+          <div class="label">Reel 03</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4">
+          <div class="label">Reel 04</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5">
+          <div class="label">Reel 05</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1">
+          <div class="label">Reel 01</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2">
+          <div class="label">Reel 02</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3">
+          <div class="label">Reel 03</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4">
+          <div class="label">Reel 04</div>
+        </div>
+        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5">
+          <div class="label">Reel 05</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Made with love by Arun — <a href="#">Get in touch</a>
+  </footer>
+
+  <!-- LIGHTBOX OVERLAY -->
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="Full preview">
+    <div class="lb-hint">Move cursor to close</div>
   </div>
-</section>
 
-<footer>
-  Made with love by Arun — <a href="#">Get in touch</a>
-</footer>
+  <script>
+    /* ---------- PRELOADER & HERO REVEAL ---------- */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('loaded');
+        document.body.classList.add('hero-active');
+      }, 1200);
+    });
 
-<!-- LIGHTBOX OVERLAY -->
-<div id="lightbox">
-  <img id="lightbox-img" src="" alt="Full preview">
-  <div class="lb-hint">Move cursor to close</div>
-</div>
+    /* ---------- NAVBAR SCROLL TRANSITION ---------- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
 
-<script>
-  /* ---------- PRELOADER & HERO REVEAL ---------- */
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('preloader').classList.add('loaded');
-      document.body.classList.add('hero-active');
-    }, 1200);
-  });
+    /* ---------- LIGHTBOX & HOVER PEEK ---------- */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    let activeCard = null;
 
-  /* ---------- NAVBAR SCROLL TRANSITION ---------- */
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+    function showLightbox(src) {
+      if (!src) return;
+      lbImg.src = src;
+      lb.classList.add('active');
     }
-  });
+    function hideLightbox() {
+      lb.classList.remove('active');
+      lbImg.src = '';
+    }
 
-  /* ---------- LIGHTBOX & HOVER PEEK ---------- */
-  const lb    = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  let activeCard = null;
+    document.querySelectorAll('.card').forEach(card => {
+      const img = card.querySelector('img');
+      if (!img) return;
 
-  function showLightbox(src) {
-    if (!src) return;
-    lbImg.src = src;
-    lb.classList.add('active');
-  }
-  function hideLightbox() {
-    lb.classList.remove('active');
-    lbImg.src = '';
-  }
+      /* Tap / Click to open full size photo modal */
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showLightbox(img.src);
+      });
 
-  document.querySelectorAll('.card').forEach(card => {
-    const img = card.querySelector('img');
-    if (!img) return;
+      /* Smooth iOS style hover peek & background blur on PC mouse */
+      card.addEventListener('mouseenter', (e) => {
+        if (e.pointerType === 'touch') return;
+        activeCard = card;
+        card.classList.add('is-hovered');
+        document.body.classList.add('card-hovered');
+      });
 
-    /* Tap / Click to open full size photo modal */
-    card.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showLightbox(img.src);
+      card.addEventListener('mouseleave', (e) => {
+        if (e.pointerType === 'touch') return;
+        card.classList.remove('is-hovered');
+        document.body.classList.remove('card-hovered');
+        activeCard = null;
+      });
     });
 
-    /* Smooth iOS style hover peek & background blur on PC mouse */
-    card.addEventListener('mouseenter', (e) => {
-      if (e.pointerType === 'touch') return;
-      activeCard = card;
-      card.classList.add('is-hovered');
-      document.body.classList.add('card-hovered');
+    /* Close full size lightbox modal on click, tap, or Escape key */
+    lb.addEventListener('click', hideLightbox);
+    lb.addEventListener('touchstart', hideLightbox, { passive: true });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideLightbox();
     });
-
-    card.addEventListener('mouseleave', (e) => {
-      if (e.pointerType === 'touch') return;
-      card.classList.remove('is-hovered');
-      document.body.classList.remove('card-hovered');
-      activeCard = null;
-    });
-  });
-
-  /* Close full size lightbox modal on click, tap, or Escape key */
-  lb.addEventListener('click', hideLightbox);
-  lb.addEventListener('touchstart', hideLightbox, { passive: true });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') hideLightbox();
-  });
-</script>
+  </script>
 
 </body>
+
 </html>
