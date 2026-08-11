@@ -534,7 +534,6 @@
   const lbImg     = document.getElementById('lightbox-img');
   let   idleTimer = null;
   let   activeCard = null;
-  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   function showLightbox(src) {
     if (!src) return;
@@ -551,44 +550,46 @@
     const img = card.querySelector('img');
     if (!img) return;
 
-    /* Tap/Click to open lightbox */
+    /* Tap / Click to open lightbox immediately */
     card.addEventListener('click', (e) => {
       e.stopPropagation();
       showLightbox(img.src);
     });
 
-    /* Hover preview on desktop mouse only */
-    if (!isTouchDevice) {
-      card.addEventListener('mouseenter', () => {
-        activeCard = img;
-        startIdle();
-      });
+    /* Mouse cursor hover preview for PC */
+    card.addEventListener('mouseenter', (e) => {
+      if (e.pointerType === 'touch') return;
+      activeCard = img;
+      startIdle();
+    });
 
-      card.addEventListener('mousemove', () => {
-        if (lb.classList.contains('active')) {
-          hideLightbox();
-        }
-        clearTimeout(idleTimer);
-        startIdle();
-      });
-
-      card.addEventListener('mouseleave', () => {
-        clearTimeout(idleTimer);
+    card.addEventListener('mousemove', (e) => {
+      if (e.pointerType === 'touch') return;
+      if (lb.classList.contains('active')) {
         hideLightbox();
-        activeCard = null;
-      });
-    }
+      }
+      clearTimeout(idleTimer);
+      startIdle();
+    });
+
+    card.addEventListener('mouseleave', (e) => {
+      if (e.pointerType === 'touch') return;
+      clearTimeout(idleTimer);
+      hideLightbox();
+      activeCard = null;
+    });
   });
 
   function startIdle() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
-      if (activeCard && !isTouchDevice) showLightbox(activeCard.src);
-    }, 800);
+      if (activeCard) showLightbox(activeCard.src);
+    }, 700);
   }
 
-  /* close on click/tap anywhere over lightbox */
+  /* close on click/tap anywhere over lightbox or moving cursor over lightbox */
   lb.addEventListener('click', hideLightbox);
+  lb.addEventListener('mousemove', hideLightbox);
   lb.addEventListener('touchstart', hideLightbox, { passive: true });
 </script>
 
