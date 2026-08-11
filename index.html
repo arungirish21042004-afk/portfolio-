@@ -414,19 +414,10 @@
       z-index: 1;
     }
 
-    body.card-hovered .work-section .head,
-    body.card-hovered .card:not(.is-hovered) {
-      filter: blur(6px) opacity(0.55);
-      transition: filter 0.35s ease, opacity 0.35s ease;
-    }
-
-    .card.is-hovered,
     .card:hover {
-      transform: scale(1.16) translateY(-8px);
-      z-index: 60;
-      box-shadow: 0 30px 70px rgba(23, 7, 7, 0.32);
-      filter: none !important;
-      opacity: 1 !important;
+      transform: scale(1.08) translateY(-6px);
+      z-index: 10;
+      box-shadow: 0 20px 50px rgba(23, 7, 7, 0.25);
     }
 
     .card img,
@@ -969,21 +960,6 @@
             card.addEventListener('click', (e) => {
               e.stopPropagation();
               showLightbox(img.src);
-            });
-
-            /* Smooth iOS style hover peek & background blur on PC mouse */
-            card.addEventListener('mouseenter', (e) => {
-              if (e.pointerType === 'touch') return;
-              activeCard = card;
-              card.classList.add('is-hovered');
-              document.body.classList.add('card-hovered');
-            });
-
-            card.addEventListener('mouseleave', (e) => {
-              if (e.pointerType === 'touch') return;
-              card.classList.remove('is-hovered');
-              document.body.classList.remove('card-hovered');
-              activeCard = null;
             });
           });
 
