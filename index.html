@@ -430,6 +430,30 @@
       }
     }
 
+    /* ---------- MOBILE TOUCH: Disable hover effects on touch devices ---------- */
+    @media (pointer: coarse) {
+      .work-section:has(.card:hover) .head,
+      .marquee-track:has(.card:hover) .card:not(:hover) {
+        filter: none !important;
+        opacity: 1 !important;
+      }
+      .card:hover {
+        transform: none !important;
+        box-shadow: 0 10px 30px rgba(43, 18, 16, 0.08) !important;
+      }
+      .card:hover img,
+      .card:hover video {
+        transform: none !important;
+      }
+      /* Faster, simpler animation on mobile to prevent lag */
+      .marquee-track {
+        animation-duration: 20s !important;
+      }
+      .marquee.reverse .marquee-track {
+        animation-duration: 24s !important;
+      }
+    }
+
     /* Aesthetic Cursor Hover & Background Blur (PC Mouse) */
     @media (hover: hover) and (pointer: fine) {
       .work-section:has(.card:hover) .head,
@@ -610,9 +634,19 @@
         font-size: 2.2rem;
       }
 
+      /* Mobile: let card height be driven by content, no fixed crop */
       .card {
-        width: 160px;
-        height: 240px;
+        width: auto;
+        height: 220px;
+        flex: 0 0 auto;
+      }
+
+      .card img,
+      .card video {
+        height: 100%;
+        width: auto;
+        max-width: none;
+        object-fit: contain;
       }
 
       nav a {
@@ -798,35 +832,52 @@
     </div>
     <div class="marquee">
       <div class="marquee-track">
-        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1" loading="lazy" decoding="async">
+        <!-- Original set -->
+        <div class="card"><img src="coreldraw/coreldraw1.jpg" alt="CorelDraw project 1" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw2.jpg" alt="CorelDraw project 2" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw3.jpg" alt="CorelDraw project 3" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw4.jpg" alt="CorelDraw project 4" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 04</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw5.jpg" alt="CorelDraw project 5" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 05</div>
         </div>
-        <!-- Duplicate for seamless loop -->
-        <div class="card"><img src="https://picsum.photos/seed/cd1/600/400" alt="CorelDraw project 1" loading="lazy" decoding="async">
+        <!-- Duplicate set 1 for seamless loop -->
+        <div class="card"><img src="coreldraw/coreldraw1.jpg" alt="CorelDraw project 1" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 01</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd2/600/400" alt="CorelDraw project 2" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw2.jpg" alt="CorelDraw project 2" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 02</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd3/600/400" alt="CorelDraw project 3" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw3.jpg" alt="CorelDraw project 3" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 03</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd4/600/400" alt="CorelDraw project 4" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw4.jpg" alt="CorelDraw project 4" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 04</div>
         </div>
-        <div class="card"><img src="https://picsum.photos/seed/cd5/600/400" alt="CorelDraw project 5" loading="lazy" decoding="async">
+        <div class="card"><img src="coreldraw/coreldraw5.jpg" alt="CorelDraw project 5" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <div class="label">Project 05</div>
+        </div>
+        <!-- Duplicate set 2 for extra coverage -->
+        <div class="card"><img src="coreldraw/coreldraw1.jpg" alt="CorelDraw project 1" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <div class="label">Project 01</div>
+        </div>
+        <div class="card"><img src="coreldraw/coreldraw2.jpg" alt="CorelDraw project 2" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <div class="label">Project 02</div>
+        </div>
+        <div class="card"><img src="coreldraw/coreldraw3.jpg" alt="CorelDraw project 3" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <div class="label">Project 03</div>
+        </div>
+        <div class="card"><img src="coreldraw/coreldraw4.jpg" alt="CorelDraw project 4" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <div class="label">Project 04</div>
+        </div>
+        <div class="card"><img src="coreldraw/coreldraw5.jpg" alt="CorelDraw project 5" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="label">Project 05</div>
         </div>
       </div>
