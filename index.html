@@ -363,6 +363,22 @@
       line-height: 1.5;
     }
 
+    .video-coming-statement {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-top: 24px;
+      padding: 24px 0 40px;
+    }
+
+    .video-coming-statement .grad {
+      background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
     .marquee {
       width: 100%;
       overflow: hidden;
@@ -592,6 +608,37 @@
       font-weight: 600;
       text-decoration: none;
       border-bottom: 1.5px solid var(--accent-orange);
+    }
+
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 14px;
+      font-size: 0.95rem;
+    }
+
+    .footer-contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--accent-orange);
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .footer-contact a:hover {
+      color: var(--accent-red);
+      border-color: var(--accent-red);
+    }
+
+    .footer-contact .divider {
+      color: var(--text-muted);
+      opacity: 0.4;
     }
 
     /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
@@ -888,48 +935,26 @@
     <div class="head">
       <div class="tag"><span class="asterisk">✳</span> 04 — Motion &amp; Video Editing</div>
       <h2>Video Editing</h2>
-      <div class="desc">Dynamic reel editing, motion graphics, color grading, and video post-production.</div>
-    </div>
-    <div class="marquee reverse">
-      <div class="marquee-track">
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1" loading="lazy" decoding="async">
-          <div class="label">Reel 01</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2" loading="lazy" decoding="async">
-          <div class="label">Reel 02</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3" loading="lazy" decoding="async">
-          <div class="label">Reel 03</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4" loading="lazy" decoding="async">
-          <div class="label">Reel 04</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5" loading="lazy" decoding="async">
-          <div class="label">Reel 05</div>
-        </div>
-        <!-- Duplicate for seamless loop -->
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve1/600/400" alt="Video project 1" loading="lazy" decoding="async">
-          <div class="label">Reel 01</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve2/600/400" alt="Video project 2" loading="lazy" decoding="async">
-          <div class="label">Reel 02</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve3/600/400" alt="Video project 3" loading="lazy" decoding="async">
-          <div class="label">Reel 03</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve4/600/400" alt="Video project 4" loading="lazy" decoding="async">
-          <div class="label">Reel 04</div>
-        </div>
-        <div class="card video-card"><img src="https://picsum.photos/seed/ve5/600/400" alt="Video project 5" loading="lazy" decoding="async">
-          <div class="label">Reel 05</div>
-        </div>
-      </div>
+      <h3 class="video-coming-statement">
+        Video editing projects — <span class="grad">adding soon.</span>
+      </h3>
     </div>
   </section>
 
-        <footer>
-          Made with love by Arun — <a href="#">Get in touch</a>
-        </footer>
+  <footer>
+    <p>Made with love by Arun — <a href="#video">Get in touch</a></p>
+    <div class="footer-contact">
+      <a href="tel:9350553932">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        9350553932
+      </a>
+      <span class="divider">•</span>
+      <a href="mailto:arungirish21042004@gmail.com">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+        arungirish21042004@gmail.com
+      </a>
+    </div>
+  </footer>
 
         <!-- LIGHTBOX OVERLAY -->
         <div id="lightbox">
